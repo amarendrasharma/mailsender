@@ -20,9 +20,9 @@ use Illuminate\Support\Facades\Mail;
 Route::get('/', function () {
 
     $users =  User::pluck('email')->toArray();
-    TestJob::dispatch($users);
-
-    dispatch($users);
+    foreach ($users as $user) {
+        TestJob::dispatch($user)->delay(now()->addSeconds(15));
+    }
     // $to = "amar@sss.com";
     // Mail::to($to)->send(new Test());
     return view('welcome');

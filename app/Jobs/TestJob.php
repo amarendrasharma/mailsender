@@ -15,10 +15,10 @@ class TestJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public $users;
-    public function __construct($users)
+    public $user;
+    public function __construct($user)
     {
-        $this->users = $users;
+        $this->user = $user;
     }
 
     /**
@@ -29,10 +29,9 @@ class TestJob implements ShouldQueue
     public function handle()
     {
         $when = now()->addMinutes(10);
-        foreach ($this->users as $user) {
-            Mail::to($user)
-                ->later($when, new Test());
-            // ->queue(new Test());
-        }
+        Mail::to($this->user)
+            ->later($when, new Test());
+
+        // ->queue(new Test());
     }
 }
