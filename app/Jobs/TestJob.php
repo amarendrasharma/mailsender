@@ -28,7 +28,7 @@ class TestJob implements ShouldQueue
      */
     public function handle()
     {
-        $when = now()->addMinutes(10);
+        $when = now()->addSeconds(10);
         Mail::to($this->user)
             ->later($when, new Test());
 
