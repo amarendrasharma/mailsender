@@ -22,13 +22,13 @@ use Maatwebsite\Excel\Facades\Excel;
 */
 
 Route::get('/', function () {
-    return Excel::download(new UsersExport, 'users.xlsx');
+    // return Excel::download(new UsersExport, 'users.xlsx');
 
     // Excel::import(new UsersImport, 'users.xlxs');
-    // $users =  User::pluck('email')->toArray();
-    // foreach ($users as $user) {
-    //     TestJob::dispatch($user)->delay(now()->addSeconds(15));
-    // }
+    $users =  User::pluck('email')->toArray();
+    foreach ($users as $user) {
+        TestJob::dispatch($user)->delay(now()->addSeconds(15));
+    }
     // $to = "amar@sss.com";
     // Mail::to($to)->send(new Test());
     return view('welcome');
@@ -39,3 +39,10 @@ Route::get('/', function () {
 
 Route::get("/import", 'UploadExcelController@create');
 Route::post("/import/excel", 'UploadExcelController@store');
+
+Auth::routes();
+Route::name('jobs')->get('/jobs', 'HomeController@jobs');
+Route::name('simulate')->get('/simulate', 'HomeController@simulate');
+Route::name('home')->get('/home', 'HomeController@index');
+
+// Route::get('/home', 'HomeController@index')->name('home');

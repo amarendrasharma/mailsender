@@ -2,13 +2,16 @@
 
 namespace App\Imports;
 
-use App\User;
+use App\Test;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 
 class TestImport implements ToModel, WithChunkReading, ShouldQueue
 {
+    use Importable;
+
     /**
      * @param array $row
      *
@@ -16,7 +19,7 @@ class TestImport implements ToModel, WithChunkReading, ShouldQueue
      */
     public function model(array $row)
     {
-        return new User([
+        return new Test([
             'name' => $row[0],
             'email' => $row[1]
         ]);
