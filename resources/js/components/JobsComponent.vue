@@ -9,21 +9,13 @@
 				<td width="80%">{{ job.description }}</td>
 				<td>{{ job.created_at }}</td>
 				<td>{{ job.run }}</td>
-				<td>{{ !job.run }}</td>
+				<!-- <td>{{ !job.run }}</td> -->
 			</tr>
 		</tbody>
 	</table>
 </template>
 
 <script>
-	// import Echo from "laravel-echo";
-	// import Pusher from "pusher-js";
-	// const EchoDemo = new Echo({
-	// 	broadcaster: "pusher",
-	// 	key: process.env.MIX_PUSHER_APP_KEY,
-	// 	cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-	// 	encrypted: true
-	// });
 	export default {
 		props: ["jobs"],
 		data() {
@@ -33,6 +25,7 @@
 			this.refreshAllJobs();
 			Echo.channel("email-queue")
 				.listen(".add", e => {
+					console.log(e);
 					this.refreshAllJobs(e);
 					console.log("add");
 				})
@@ -42,7 +35,7 @@
 				});
 		},
 		methods: {
-			refreshAllJobs() {
+			refreshAllJobs(e) {
 				axios.get("/jobs").then(e => (this.allJobs = e.data));
 			}
 		}

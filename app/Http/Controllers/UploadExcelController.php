@@ -24,12 +24,12 @@ class UploadExcelController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'excel' => file
-        ]);
-        Excel::store(new UsersImport, $request->file('excel'));
-        Excel::queueImport(new TestImport, $request->file('excel'));
-        (new TestImport)->import('users (1).xlsx', 'local', \Maatwebsite\Excel\Excel::XLSX);
+        // $this->validate($request, [
+        //     'excel' => file
+        // ]);
+        // Excel::store(new UsersImport, $request->file('excel'));
+        // Excel::queueImport(new TestImport, $request->file('excel'));
+        (new TestImport)->import('users.xlsx', 'local', \Maatwebsite\Excel\Excel::XLSX);
         // Excel::import(new TestImport, $request->file('excel'));
         return "done";
     }

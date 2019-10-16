@@ -44,5 +44,15 @@ Auth::routes();
 Route::name('jobs')->get('/jobs', 'HomeController@jobs');
 Route::name('simulate')->get('/simulate', 'HomeController@simulate');
 Route::name('home')->get('/home', 'HomeController@index');
+Route::get('/upload', function () {
+    return view('upload.upload');
+});
+Route::name('file.index')->get('/file', 'FileRecordController@index');
+Route::name('file.post')->post('/file', 'FileRecordController@store');
+Route::name('file.delete')->delete('/file/{fileRecord}', 'FileRecordController@destroy');
+
 
 // Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

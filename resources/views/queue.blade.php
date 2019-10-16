@@ -30,7 +30,6 @@
 					</div>
 					<div class="panel-body">
 						<jobs :jobs='@json($jobs)'></jobs>
-						</jobs>
 					</div>
 				</div>
 			</div>
