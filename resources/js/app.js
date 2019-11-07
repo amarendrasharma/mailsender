@@ -25,6 +25,10 @@ Vue.component(
 );
 Vue.component("jobs", require("./components/JobsComponent.vue").default);
 Vue.component(
+  "mail-sender",
+  require("./components/campaign/MailSender.vue").default
+);
+Vue.component(
   "uploader-component",
   require("./components/upload/UploaderComponent").default
 );

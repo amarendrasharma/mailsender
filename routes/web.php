@@ -40,7 +40,6 @@ Route::get('/', function () {
 Route::get("/import", 'UploadExcelController@create');
 Route::post("/import/excel", 'UploadExcelController@store');
 
-Auth::routes();
 Route::name('jobs')->get('/jobs', 'HomeController@jobs');
 Route::name('simulate')->get('/simulate', 'HomeController@simulate');
 Route::name('home')->get('/home', 'HomeController@index');
@@ -53,6 +52,13 @@ Route::name('file.delete')->delete('/file/{fileRecord}', 'FileRecordController@d
 
 
 // Route::get('/home', 'HomeController@index')->name('home');
+
+// nov 6 ,19
+Route::get('/list-emails', 'CampaignController@index');
+Route::post('/list-emails', 'CampaignController@store');
+
+// 
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
