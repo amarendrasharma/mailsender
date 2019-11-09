@@ -4,7 +4,9 @@
 
 Mailsender simplify the complexity of mass mailing. It beleives lossing battles is not mean to lossing a war . So using the power of "Queue Jobs" prodived by our beleoved framwork Laravel we empower our mass mail sending weapon <b> Mailsender </b> ha ha . lol
 
-> I hope! By reading super cool introduction you will never ask what is it ? again . I am practising to writing some documentation yet application is runnning well and good
+> I hope! By reading the super cool introduction you will never ask what is it ? again . I am practising to writing some documentation yet application is runnning well and good.
+
+> I genuinely appreciate your feedback or coorection or contribution
 
 # Installation
 
