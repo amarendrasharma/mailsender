@@ -6,7 +6,7 @@ Mailsender simplify the complexity of mass mailing. It beleives lossing battles 
 
 > I hope! By reading the super cool introduction you will never ask what is it ? again . I am practising to writing some documentation yet application is runnning well and good.
 
-> I genuinely appreciate your feedback or coorection or contribution
+> I genuinely appreciate your feedback , correction and contribution
 
 # Installation
 
