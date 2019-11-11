@@ -1,29 +1,34 @@
 <template>
 	<div>
 		<div class="container mx-auto">
-			<div class="w-1/2">
-				<div class="mb-3">
-					<select-input v-model="mail.templates" label="Select fruit" :options="options">
-						<option value="null" disabled>Select template</option>
-					</select-input>
+			<div class="flex justify-between">
+				<div class="w-1/3">
+					<div class="mb-3">
+						<select-input v-model="mail.templates" label="Select fruit" :options="options">
+							<option value="null" disabled>Select template</option>
+						</select-input>
+					</div>
 				</div>
-				<div class="mb-3">
-					<label class="form-label block mb-1 font-semibold text-gray-700">Email</label>
-					<textarea
-						v-model="mail.emails"
-						rows="20"
-						class="w-full border-2 focus:border-blue-600 outline-none rounded-lg text-left"
-						@input="validEmail"
-						:class=" validEmail? 'border-red-400' : ''  "
-					></textarea>
-				</div>
-				<div class="mb-3">
-					<loading-button
-						variant="primary"
-						@click.prevent="submitMail"
-						type="button"
-						ref="mailsender"
-					>Send Mail</loading-button>
+				<div class="w-2/3 px-2">
+					<div class="mb-3">
+						<label class="form-label block mb-1 font-semibold text-gray-700">Email</label>
+						<textarea
+							v-model="mail.emails"
+							rows="25"
+							class="w-full border-2 focus:border-blue-600 outline-none rounded-lg text-left px-3"
+							@input="validEmail"
+							:class=" validEmail? 'border-red-400' : ''  "
+						></textarea>
+						<button @click="prittify">Click to make</button>
+					</div>
+					<div class="mb-3">
+						<loading-button
+							variant="primary"
+							@click.prevent="submitMail"
+							type="button"
+							ref="mailsender"
+						>Send Mail</loading-button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -44,8 +49,29 @@
 		data() {
 			return {
 				options: [],
-				mail: {}
+				mail: {
+					emails: [
+						{
+							name: "example",
+							email: "sas@test.test"
+						},
+						{
+							name: "PingPong",
+							email: "asas@test.test"
+						}
+					]
+				}
 			};
+		},
+
+		watch: {
+			// mail: {
+			// 	handler: function(newValue) {
+			// 		newValue.emails = JSON.stringify(newValue, undefined, 4);
+			// 		console.log(newValue);
+			// 	},
+			// 	deep: true
+			// }
 		},
 		mounted() {
 			console.log(this.listmailtemp);
@@ -57,6 +83,17 @@
 			});
 		},
 		methods: {
+			prittify() {
+				// let count = 0;
+				let temp = this.mail.emails;
+				this.mail.emails = JSON.stringify(this.mail.emails, undefined, 4);
+				this.mail.emails = this.mail.emails.replace(/\r?\n/g, "\n");
+				// count += 1;
+				// if (count > 1) {
+				// 	this.mail.emails = JSON.stringify(temp);
+				// 	count = 0;
+				// }
+			},
 			submitMail() {
 				this.$refs.mailsender.startLoading();
 				axios

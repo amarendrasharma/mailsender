@@ -1968,6 +1968,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -1981,8 +1986,24 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       options: [],
-      mail: {}
+      mail: {
+        emails: [{
+          name: "example",
+          email: "sas@test.test"
+        }, {
+          name: "PingPong",
+          email: "asas@test.test"
+        }]
+      }
     };
+  },
+  watch: {// mail: {
+    // 	handler: function(newValue) {
+    // 		newValue.emails = JSON.stringify(newValue, undefined, 4);
+    // 		console.log(newValue);
+    // 	},
+    // 	deep: true
+    // }
   },
   mounted: function mounted() {
     var _this = this;
@@ -1996,6 +2017,16 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    prittify: function prittify() {
+      // let count = 0;
+      var temp = this.mail.emails;
+      this.mail.emails = JSON.stringify(this.mail.emails, undefined, 4);
+      this.mail.emails = this.mail.emails.replace(/\r?\n/g, "\n"); // count += 1;
+      // if (count > 1) {
+      // 	this.mail.emails = JSON.stringify(temp);
+      // 	count = 0;
+      // }
+    },
     submitMail: function submitMail() {
       var _this2 = this;
 
@@ -33768,91 +33799,99 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "container mx-auto" }, [
-      _c("div", { staticClass: "w-1/2" }, [
-        _c(
-          "div",
-          { staticClass: "mb-3" },
-          [
-            _c(
-              "select-input",
-              {
-                attrs: { label: "Select fruit", options: _vm.options },
-                model: {
-                  value: _vm.mail.templates,
-                  callback: function($$v) {
-                    _vm.$set(_vm.mail, "templates", $$v)
-                  },
-                  expression: "mail.templates"
-                }
-              },
-              [
-                _c("option", { attrs: { value: "null", disabled: "" } }, [
-                  _vm._v("Select template")
-                ])
-              ]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "mb-3" }, [
+      _c("div", { staticClass: "flex justify-between" }, [
+        _c("div", { staticClass: "w-1/3" }, [
           _c(
-            "label",
-            {
-              staticClass: "form-label block mb-1 font-semibold text-gray-700"
-            },
-            [_vm._v("Email")]
-          ),
-          _vm._v(" "),
-          _c("textarea", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.mail.emails,
-                expression: "mail.emails"
-              }
-            ],
-            staticClass:
-              "w-full border-2 focus:border-blue-600 outline-none rounded-lg text-left",
-            class: _vm.validEmail ? "border-red-400" : "",
-            attrs: { rows: "20" },
-            domProps: { value: _vm.mail.emails },
-            on: {
-              input: [
-                function($event) {
-                  if ($event.target.composing) {
-                    return
+            "div",
+            { staticClass: "mb-3" },
+            [
+              _c(
+                "select-input",
+                {
+                  attrs: { label: "Select fruit", options: _vm.options },
+                  model: {
+                    value: _vm.mail.templates,
+                    callback: function($$v) {
+                      _vm.$set(_vm.mail, "templates", $$v)
+                    },
+                    expression: "mail.templates"
                   }
-                  _vm.$set(_vm.mail, "emails", $event.target.value)
                 },
-                _vm.validEmail
-              ]
-            }
-          })
+                [
+                  _c("option", { attrs: { value: "null", disabled: "" } }, [
+                    _vm._v("Select template")
+                  ])
+                ]
+              )
+            ],
+            1
+          )
         ]),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "mb-3" },
-          [
+        _c("div", { staticClass: "w-2/3 px-2" }, [
+          _c("div", { staticClass: "mb-3" }, [
             _c(
-              "loading-button",
+              "label",
               {
-                ref: "mailsender",
-                attrs: { variant: "primary", type: "button" },
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    return _vm.submitMail($event)
-                  }
-                }
+                staticClass: "form-label block mb-1 font-semibold text-gray-700"
               },
-              [_vm._v("Send Mail")]
-            )
-          ],
-          1
-        )
+              [_vm._v("Email")]
+            ),
+            _vm._v(" "),
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.mail.emails,
+                  expression: "mail.emails"
+                }
+              ],
+              staticClass:
+                "w-full border-2 focus:border-blue-600 outline-none rounded-lg text-left px-3",
+              class: _vm.validEmail ? "border-red-400" : "",
+              attrs: { rows: "25" },
+              domProps: { value: _vm.mail.emails },
+              on: {
+                input: [
+                  function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.mail, "emails", $event.target.value)
+                  },
+                  _vm.validEmail
+                ]
+              }
+            }),
+            _vm._v(" "),
+            _c("button", { on: { click: _vm.prittify } }, [
+              _vm._v("Click to make")
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "mb-3" },
+            [
+              _c(
+                "loading-button",
+                {
+                  ref: "mailsender",
+                  attrs: { variant: "primary", type: "button" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.submitMail($event)
+                    }
+                  }
+                },
+                [_vm._v("Send Mail")]
+              )
+            ],
+            1
+          )
+        ])
       ])
     ])
   ])

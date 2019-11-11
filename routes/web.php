@@ -9,7 +9,7 @@ use App\Imports\UsersImport;
 use App\Exports\UsersExport;
 use Maatwebsite\Excel\Facades\Excel;
 
-Route::get('/', function () {
+Route::get('/excel', function () {
     // return Excel::download(new UsersExport, 'users.xlsx');
 
     // Excel::import(new UsersImport, 'users.xlxs');
@@ -22,6 +22,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/', function () {
+    return redirect('/list-emails');
+});
 
 
 
