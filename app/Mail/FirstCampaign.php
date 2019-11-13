@@ -20,6 +20,6 @@ class FirstCampaign extends Mailable
 
     public function build()
     {
-        return $this->subject('Jobs Harbour')->view($this->template);
+        return $this->subject('Say Hello to Jobs Harbour!')->view($this->template);
     }
 }

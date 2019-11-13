@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Test;
 use Illuminate\Http\Request;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\Process;
 
 class TestController extends Controller
 {
@@ -14,7 +16,17 @@ class TestController extends Controller
      */
     public function index()
     {
-        //
+
+
+        // $process = new Process(['ls', '-lsa']);
+        $process = new Process(['python', '../test.py']);
+        $process->run();
+
+        // executes after the command finishes
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+        dd($process->getOutput());
     }
 
     /**
