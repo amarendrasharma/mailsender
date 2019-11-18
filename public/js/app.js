@@ -1973,6 +1973,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1988,11 +1997,11 @@ __webpack_require__.r(__webpack_exports__);
       options: [],
       mail: {
         emails: [{
-          name: "example",
-          email: "sas@test.test"
+          name: "Mithicher da",
+          email: "mithicher.sumatoglobal@gmali.com"
         }, {
-          name: "PingPong",
-          email: "asas@test.test"
+          name: "Abhishek",
+          email: "abhishek.sumatoglobal@gmali.com"
         }]
       }
     };
@@ -2008,7 +2017,8 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    console.log(this.listmailtemp);
+    console.log(this.listmailtemp); // this.listmailtemp.splice(0, 2);
+
     this.listmailtemp.map(function (temp) {
       _this.options.push({
         label: temp,
@@ -2018,7 +2028,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     prittify: function prittify() {
-      // let count = 0;
+      // let count = 0;listmailtemp
       var temp = this.mail.emails;
       this.mail.emails = JSON.stringify(this.mail.emails, undefined, 4);
       this.mail.emails = this.mail.emails.replace(/\r?\n/g, "\n"); // count += 1;
@@ -33808,7 +33818,7 @@ var render = function() {
               _c(
                 "select-input",
                 {
-                  attrs: { label: "Select fruit", options: _vm.options },
+                  attrs: { label: "Select Template", options: _vm.options },
                   model: {
                     value: _vm.mail.templates,
                     callback: function($$v) {
@@ -33825,7 +33835,32 @@ var render = function() {
               )
             ],
             1
-          )
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-3" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.mail.subject,
+                  expression: "mail.subject"
+                }
+              ],
+              staticClass:
+                "bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal",
+              attrs: { type: "text", placeholder: "Subject of email" },
+              domProps: { value: _vm.mail.subject },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.mail, "subject", $event.target.value)
+                }
+              }
+            })
+          ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "w-2/3 px-2" }, [

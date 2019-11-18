@@ -7,6 +7,8 @@ use App\Mail\FirstCampaign;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
+use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Log;
 
 class CampaignController extends Controller
 {
@@ -39,17 +41,17 @@ class CampaignController extends Controller
 
     public function store(Request $request)
     {
-        $template = 'campaign.mailtemp.' . $request->templates;
+        $request['templates'] = 'campaign.mailtemp.' . $request->templates;
         // $y = json_decode($request->getContent());
         $y = json_decode($request->emails);
         $y = collect($y);
-        $x =   $y->map(function ($m) use ($template) {
+        $x =   $y->map(function ($m) use ($request) {
             // $m = collect($m);
             // $m['email'];
             // return $m->email;
-            Mail::to($m->email)->queue(new FirstCampaign($template));
+            Mail::to($m->email)->queue(new FirstCampaign($request->only(['templates', 'subject'])));
+            Log::info($m->email);
         });
-        dd($x);
         // $data = ['users' => $users];
     }
 

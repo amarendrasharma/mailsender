@@ -10,6 +10,10 @@ use App\Exports\UsersExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+});
 Route::get('/python', 'TestController@index');
 Route::get('/excel', function () {
     // return Excel::download(new UsersExport, 'users.xlsx');
@@ -47,8 +51,8 @@ Route::name('file.delete')->delete('/file/{fileRecord}', 'FileRecordController@d
 // Route::get('/home', 'HomeController@index')->name('home');
 
 // nov 6 ,19
-Route::get('/list-emails', 'CampaignController@index');
-Route::post('/list-emails', 'CampaignController@store');
+Route::get('/list-emails', 'CampaignController@index')->middleware('auth');
+Route::post('/list-emails', 'CampaignController@store')->middleware('auth');
 
 // 
 

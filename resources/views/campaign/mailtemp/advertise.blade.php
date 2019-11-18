@@ -115,8 +115,8 @@
                         <tbody>
                           <tr>
                             <td style="width:150px;">
-                              <a href="https://jobsharbour.com/" target="_blank"><img height="auto"
-                                  src="https://jobsharbour.com/jh-logo.svg"
+                              <a href="https://jobsharbour.com/" target="_blank">
+                                <img height="auto" src="https://jobsharbour.com/jh-logo.png"
                                   style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;"
                                   width="150"></a>
                             </td>
@@ -135,7 +135,7 @@
                         <tbody>
                           <tr>
                             <td style="width:580px;">
-                              <img height="auto" src="/home/sumato/Desktop/Group 5.png"
+                              <img height="auto" src="https://jobsharbour.com/advertise.png"
                                 style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;"
                                 width="580">
                             </td>
@@ -164,7 +164,16 @@
 
                     <td align="center" style="word-break:break-word;">
                       <div style="margin-bottom: 20px;text-align:left;color:#2d3748;">We are excited to announce the
-                        release of our new product/service.</div>
+                        release of our new product/service named <strong>Jobs Harbour</strong>.</div>
+                    </td>
+                  </tr>
+
+                  <tr>
+
+                    <td align="center" style="word-break:break-word;">
+                      <div style="margin-bottom: 20px;text-align:left;color:#2d3748;">Jobs Harbour is an online web
+                        based job listing site for both employers and job seekers. Its primary goal is to provide you up
+                        to date job information from all around Assam and the Northeast.</div>
                     </td>
                   </tr>
 
@@ -172,18 +181,31 @@
 
                     <td align="center" style="word-break:break-word;">
                       <div style="margin-bottom: 20px;text-align:left;color:#2d3748;">For the past few months, we have
-                        been tirelessly working on a product/services named <strong>Jobs Harbour</strong>, a job listing
-                        web app portal. We believe that Jobs Harbour will help your job listings reach to large number
-                        of potential candidates so that you can pick the best out of them.</div>
+                        been tirelessly working on this web based portal and we believe that this will help your job
+                        listings reach to a large number of potential candidates so that you can pick the best out of
+                        them.</div>
                     </td>
                   </tr>
 
                   <tr>
                     <td align="left" style="word-break:break-word;">
-                      <div style="margin-bottom: 40px;text-align:left;color:#2d3748;">Here in <strong>Jobs
-                          Harbour</strong> we provide the employers and consultancies a platform to advertise job lists
-                        that will be easily accessible for job seekers. We hope you make the most of our special
-                        platform that we have created only for you.</div>
+                      <div style="text-align:left;color:#2d3748;">Jobs Harbour provides employers and consultancies,
+                        some of the following features:</div>
+                      <ul style="color:#2d3748; margin-bottom: 20px;">
+                        <li>Post a Job</li>
+                        <li>Get potential candidates</li>
+                        <li>Get page views of Job Post</li>
+                        <li>Get resume straight in your inbox</li>
+                        <li>and many more...</li>
+                      </ul>
+                    </td>
+                  </tr>
+
+                  <tr>
+
+                    <td align="center" style="word-break:break-word;">
+                      <div style="margin-bottom: 40px;text-align:left;color:#2d3748;">So what are you still waiting for?
+                        Click the button below and start your journey in Jobs Harbour.</div>
                     </td>
                   </tr>
 
@@ -198,9 +220,17 @@
 
                   <tr>
                     <td align="left" style="word-break:break-word;">
-                      <div style="margin-top: 40px;line-height:20px;text-align:left;color:#2d3748;">Questions? We're
-                        only an email away: <a style="color: #5ebed6;"
-                          href="mailto:hello@jobsharbour.com">hello@jobsharbour.com</a></div>
+                      <div style="margin-top: 40px;text-align:left;color:#2d3748;">Questions? We're only an email away:
+                        <a style="color: #5ebed6;" href="mailto:hello@jobsharbour.com">hello@jobsharbour.com</a></div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td align="left" style="word-break:break-word;">
+                      <div style="margin-top: 40px;text-align:left;color:#2d3748;">
+                        Regards, <br>
+                        Team Jobs Harbour
+                      </div>
                     </td>
                   </tr>
                 </table>

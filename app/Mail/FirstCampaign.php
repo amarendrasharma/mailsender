@@ -6,20 +6,24 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use GuzzleHttp\Client;
 
 class FirstCampaign extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $template;
-    public function __construct($template)
+    public $subject;
+    public function __construct($data)
     {
-        $this->template = $template;
+        $this->template = $data['templates'];
+        $this->subject = $data['subject'];
+        // $this->from = "tingtong@pingpong.dingdong";
     }
 
 
     public function build()
     {
-        return $this->subject('Say Hello to Jobs Harbour!')->view($this->template);
+        return $this->subject($this->subject)->view($this->template);
     }
 }

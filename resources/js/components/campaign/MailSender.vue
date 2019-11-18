@@ -4,9 +4,18 @@
 			<div class="flex justify-between">
 				<div class="w-1/3">
 					<div class="mb-3">
-						<select-input v-model="mail.templates" label="Select fruit" :options="options">
+						<select-input v-model="mail.templates" label="Select Template" :options="options">
 							<option value="null" disabled>Select template</option>
 						</select-input>
+					</div>
+
+					<div class="mb-3">
+						<input
+							class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
+							type="text"
+							placeholder="Subject of email"
+							v-model="mail.subject"
+						/>
 					</div>
 				</div>
 				<div class="w-2/3 px-2">
@@ -17,7 +26,7 @@
 							rows="25"
 							class="w-full border-2 focus:border-blue-600 outline-none rounded-lg text-left px-3"
 							@input="validEmail"
-							:class=" validEmail? 'border-red-400' : ''  "
+							:class="validEmail ? 'border-red-400' : ''"
 						></textarea>
 						<button @click="prittify">Click to make</button>
 					</div>
@@ -52,12 +61,12 @@
 				mail: {
 					emails: [
 						{
-							name: "example",
-							email: "sas@test.test"
+							name: "Mithicher da",
+							email: "mithicher.sumatoglobal@gmali.com"
 						},
 						{
-							name: "PingPong",
-							email: "asas@test.test"
+							name: "Abhishek",
+							email: "abhishek.sumatoglobal@gmali.com"
 						}
 					]
 				}
@@ -75,6 +84,7 @@
 		},
 		mounted() {
 			console.log(this.listmailtemp);
+			// this.listmailtemp.splice(0, 2);
 			this.listmailtemp.map(temp => {
 				this.options.push({
 					label: temp,
@@ -84,7 +94,7 @@
 		},
 		methods: {
 			prittify() {
-				// let count = 0;
+				// let count = 0;listmailtemp
 				let temp = this.mail.emails;
 				this.mail.emails = JSON.stringify(this.mail.emails, undefined, 4);
 				this.mail.emails = this.mail.emails.replace(/\r?\n/g, "\n");
@@ -133,5 +143,4 @@
 	};
 </script>
 
-<style>
-</style>
+<style></style>
