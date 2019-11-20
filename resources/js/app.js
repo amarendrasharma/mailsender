@@ -8,6 +8,10 @@ require("./bootstrap");
 
 window.Vue = require("vue");
 
+import VueSnackbar from "vue-snack";
+import "vue-snack/dist/vue-snack.min.css";
+
+Vue.use(VueSnackbar, { position: "bottom-right", time: 3000 });
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

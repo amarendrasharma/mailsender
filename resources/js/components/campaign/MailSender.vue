@@ -62,11 +62,11 @@
 					emails: [
 						{
 							name: "Mithicher da",
-							email: "mithicher.sumatoglobal@gmali.com"
+							email: "mithicher.sumatoglobal@gmail.com"
 						},
 						{
 							name: "Abhishek",
-							email: "abhishek.sumatoglobal@gmali.com"
+							email: "abhishek.sumatoglobal@gmail.com"
 						}
 					]
 				}
@@ -109,6 +109,10 @@
 				axios
 					.post("/list-emails", this.mail)
 					.then(res => {
+						this.$snack.success({
+							text: "All mails are queued",
+							action: this.clickAction
+						});
 						this.$refs.mailsender.stopLoading();
 					})
 					.catch(err => {

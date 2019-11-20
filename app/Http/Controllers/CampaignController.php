@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Campaign;
 use App\Mail\FirstCampaign;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
+use Monolog\Handler\FirePHPHandler;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
 class CampaignController extends Controller
 {
@@ -45,14 +49,18 @@ class CampaignController extends Controller
         // $y = json_decode($request->getContent());
         $y = json_decode($request->emails);
         $y = collect($y);
-        $x =   $y->map(function ($m) use ($request) {
+        Log::info(count($y));
+
+        $x = $y->map(function ($m) use ($request) {
             // $m = collect($m);
             // $m['email'];
             // return $m->email;
             Mail::to($m->email)->queue(new FirstCampaign($request->only(['templates', 'subject'])));
-            Log::info($m->email);
+            // Log::info($m->name);
+            Log::info($m->name . $m->email);
         });
-        // $data = ['users' => $users];
+
+        return "All mails are queued";
     }
 
 
