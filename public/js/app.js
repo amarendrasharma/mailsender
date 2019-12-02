@@ -1988,6 +1988,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2004,17 +2024,19 @@ __webpack_require__.r(__webpack_exports__);
   props: ["listmailtemp"],
   data: function data() {
     return {
-      view: 1,
+      view: false,
       options: [],
       tablemails: [],
       mail: {
-        emails: [{
-          name: "Mithicher da",
-          email: "mithicher.sumatoglobal@gmail.com"
-        }, {
-          name: "Abhishek",
-          email: "abhishek.sumatoglobal@gmail.com"
-        }]
+        emails: [// {
+          // 	name: "Mithicher da",
+          // 	email: "mithicher.sumatoglobal@gmail.com"
+          // },
+          // {
+          // 	name: "Abhishek",
+          // 	email: "abhishek.sumatoglobal@gmail.com"
+          // }
+        ]
       }
     };
   },
@@ -2042,26 +2064,19 @@ __webpack_require__.r(__webpack_exports__);
     makeit: function makeit() {
       var x = JSON.parse(this.mail.emails);
       console.log("emails", x);
-      this.view = 1;
+      this.view = !this.view;
       this.tablemails = x;
     },
     prittify: function prittify() {
-      // let count = 0;listmailtemp
-      var temp = this.mail.emails; // this.mail.emails = JSON.stringify(this.mail.emails, undefined, 4);
-      // this.mail.emails = this.mail.emails.replace(/\r?\n/g, "\n");
+      this.view = !this.view; // let count = 0;listmailtemp
 
-      this.mail.emails = JSON.stringify(JSON.parse(temp), undefined, 4); // document.getElementById("result-before").innerHTML = JSON.stringify(
-      // 	JSON.parse(temp)
-      // );
-
+      var temp = this.mail.emails;
+      this.mail.emails = JSON.stringify(JSON.parse(temp), undefined, 4);
       document.getElementById("result-after").innerHTML = "<pre>" + JSON.stringify(JSON.parse(temp), undefined, 2) + "</pre>"; // count += 1;
       // if (count > 1) {
       // 	this.mail.emails = JSON.stringify(temp);
       // 	count = 0;
       // }
-
-      this.tablemails = [];
-      this.view = 2;
     },
     submitMail: function submitMail() {
       var _this2 = this;
@@ -2079,6 +2094,21 @@ __webpack_require__.r(__webpack_exports__);
       })["finally"](function () {
         _this2.$refs.mailsender.stopLoading();
       }); // : this.huanai();
+    },
+    clearJobs: function clearJobs() {
+      var _this3 = this;
+
+      this.$refs.clearJobs.startLoading();
+      axios.post("/clear-jobs").then(function (res) {
+        _this3.$snack.success({
+          text: "Queue Clear",
+          action: _this3.clickAction
+        });
+
+        _this3.$refs.clearJobs.stopLoading();
+      })["catch"](function (err) {
+        _this3.$refs.clearJobs.stopLoading();
+      });
     },
     validEmail: function validEmail() {
       return true;
@@ -2495,6 +2525,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -33941,11 +33973,57 @@ var render = function() {
   return _c("div", [
     _c("div", { staticClass: "container mx-auto" }, [
       _c("div", { staticClass: "flex justify-between" }, [
-        _c("div", { staticClass: "w-7/12" }, [
+        _c("div", { staticClass: "w-6/12" }, [
           _c(
             "div",
             { staticClass: "mb-3" },
             [
+              _c(
+                "loading-button",
+                {
+                  ref: "clearJobs",
+                  staticClass: "mb-2",
+                  attrs: { variant: "primary", type: "button" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.clearJobs($event)
+                    }
+                  }
+                },
+                [_vm._v("Clear Queue")]
+              ),
+              _vm._v(" "),
+              _c(
+                "loading-button",
+                {
+                  staticClass: "mb-2",
+                  attrs: { variant: "primary", type: "button" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.makeit($event)
+                    }
+                  }
+                },
+                [_vm._v("Tabler View")]
+              ),
+              _vm._v(" "),
+              _c(
+                "loading-button",
+                {
+                  staticClass: "mb-2",
+                  attrs: { variant: "primary", type: "button" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.prittify($event)
+                    }
+                  }
+                },
+                [_vm._v("JSON Preview")]
+              ),
+              _vm._v(" "),
               _c(
                 "select-input",
                 {
@@ -34027,9 +34105,7 @@ var render = function() {
                   _vm.validEmail
                 ]
               }
-            }),
-            _vm._v(" "),
-            _c("button", { on: { click: _vm.makeit } }, [_vm._v("table")])
+            })
           ]),
           _vm._v(" "),
           _c(
@@ -34057,11 +34133,29 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "w-5/12 px-2" },
+          { staticClass: "w-6/12 px-2" },
           [
-            _c("table-component", { attrs: { mails: _vm.tablemails } }),
+            _c("table-component", {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.view,
+                  expression: "view"
+                }
+              ],
+              attrs: { mails: _vm.tablemails }
+            }),
             _vm._v(" "),
             _c("div", {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: !_vm.view,
+                  expression: "!view"
+                }
+              ],
               staticStyle: { overflow: "auto", height: "600px" },
               attrs: { id: "result-after" }
             })
@@ -34457,23 +34551,27 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm._v("\n\t" + _vm._s(_vm.emails) + "\n\t"),
-    _c("table", { staticClass: "table-auto" }, [
+    _c("table", { staticClass: "table-fixed" }, [
       _vm._m(0),
       _vm._v(" "),
       _c(
         "tbody",
+        {
+          staticClass:
+            "flex flex-col items-center justify-between overflow-y-scroll w-full",
+          staticStyle: { height: "500px" }
+        },
         _vm._l(_vm.mails, function(mail, index) {
-          return _c("tr", { key: index, staticClass: "bg-gray-100" }, [
-            _c("td", { staticClass: "border px-4 py-2" }, [
+          return _c("tr", { key: index, staticClass: "flex w-full" }, [
+            _c("td", { staticClass: "border px-4 py-2 w-1/6" }, [
               _vm._v(_vm._s(index))
             ]),
             _vm._v(" "),
-            _c("td", { staticClass: "border px-4 py-2" }, [
+            _c("td", { staticClass: "border px-4 py-2 w-2/6" }, [
               _vm._v(_vm._s(mail.name))
             ]),
             _vm._v(" "),
-            _c("td", { staticClass: "border px-4 py-2" }, [
+            _c("td", { staticClass: "border px-4 py-2 w-3/6" }, [
               _vm._v(_vm._s(mail.email))
             ])
           ])
@@ -34488,13 +34586,13 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { staticClass: "px-4 py-2" }, [_vm._v("#")]),
+    return _c("thead", { staticClass: "bg-black flex text-white w-full" }, [
+      _c("tr", { staticClass: "flex w-full" }, [
+        _c("th", { staticClass: "px-4 py-2 w-1/6" }, [_vm._v("#")]),
         _vm._v(" "),
-        _c("th", { staticClass: "px-4 py-2" }, [_vm._v("Name")]),
+        _c("th", { staticClass: "px-4 py-2 w-2/6" }, [_vm._v("Name")]),
         _vm._v(" "),
-        _c("th", { staticClass: "px-4 py-2" }, [_vm._v("Email")])
+        _c("th", { staticClass: "px-4 py-2 w-3/6" }, [_vm._v("Email")])
       ])
     ])
   }

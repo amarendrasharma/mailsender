@@ -36,7 +36,14 @@ class TestController extends Controller
      */
     public function create()
     {
-        //
+        $process = new Process(['bash', '../queuerunner.sh']);
+        $process->run();
+
+        // executes after the command finishes
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+        dd($process->getOutput());
     }
 
     /**

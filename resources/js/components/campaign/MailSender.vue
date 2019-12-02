@@ -2,8 +2,30 @@
 	<div>
 		<div class="container mx-auto">
 			<div class="flex justify-between">
-				<div class="w-7/12">
+				<div class="w-6/12">
 					<div class="mb-3">
+						<loading-button
+							variant="primary"
+							@click.prevent="clearJobs"
+							type="button"
+							ref="clearJobs"
+							class="mb-2"
+						>Clear Queue</loading-button>
+
+						<loading-button
+							variant="primary"
+							@click.prevent="makeit"
+							type="button"
+							class="mb-2"
+						>Tabler View</loading-button>
+
+						<loading-button
+							variant="primary"
+							@click.prevent="prittify"
+							type="button"
+							class="mb-2"
+						>JSON Preview</loading-button>
+
 						<select-input v-model="mail.templates" label="Select Template" :options="options">
 							<option value="null" disabled>Select template</option>
 						</select-input>
@@ -26,8 +48,6 @@
 							@input="validEmail"
 							:class="validEmail ? 'border-red-400' : ''"
 						></textarea>
-						<!-- <button @click="prittify">JSON</button> -->
-						<button @click="makeit">table</button>
 					</div>
 					<div class="mb-3">
 						<loading-button
@@ -38,9 +58,9 @@
 						>Send Mail</loading-button>
 					</div>
 				</div>
-				<div class="w-5/12 px-2">
-					<table-component :mails="tablemails"></table-component>
-					<div id="result-after" style="overflow:auto;height:600px;"></div>
+				<div class="w-6/12 px-2">
+					<table-component :mails="tablemails" v-show="view"></table-component>
+					<div id="result-after" style="overflow:auto;height:600px;" v-show="!view"></div>
 				</div>
 			</div>
 		</div>
@@ -64,19 +84,19 @@
 		props: ["listmailtemp"],
 		data() {
 			return {
-				view: 1,
+				view: false,
 				options: [],
 				tablemails: [],
 				mail: {
 					emails: [
-						{
-							name: "Mithicher da",
-							email: "mithicher.sumatoglobal@gmail.com"
-						},
-						{
-							name: "Abhishek",
-							email: "abhishek.sumatoglobal@gmail.com"
-						}
+						// {
+						// 	name: "Mithicher da",
+						// 	email: "mithicher.sumatoglobal@gmail.com"
+						// },
+						// {
+						// 	name: "Abhishek",
+						// 	email: "abhishek.sumatoglobal@gmail.com"
+						// }
 					]
 				}
 			};
@@ -105,19 +125,14 @@
 			makeit() {
 				let x = JSON.parse(this.mail.emails);
 				console.log("emails", x);
-				this.view = 1;
+				this.view = !this.view;
 				this.tablemails = x;
 			},
 			prittify() {
+				this.view = !this.view;
 				// let count = 0;listmailtemp
 				let temp = this.mail.emails;
-				// this.mail.emails = JSON.stringify(this.mail.emails, undefined, 4);
-				// this.mail.emails = this.mail.emails.replace(/\r?\n/g, "\n");
 				this.mail.emails = JSON.stringify(JSON.parse(temp), undefined, 4);
-				// document.getElementById("result-before").innerHTML = JSON.stringify(
-				// 	JSON.parse(temp)
-				// );
-
 				document.getElementById("result-after").innerHTML =
 					"<pre>" +
 					JSON.stringify(JSON.parse(temp), undefined, 2) +
@@ -128,8 +143,6 @@
 				// 	this.mail.emails = JSON.stringify(temp);
 				// 	count = 0;
 				// }
-				this.tablemails = [];
-				this.view = 2;
 			},
 			submitMail() {
 				this.$refs.mailsender.startLoading();
@@ -150,7 +163,21 @@
 					});
 				// : this.huanai();
 			},
-
+			clearJobs() {
+				this.$refs.clearJobs.startLoading();
+				axios
+					.post("/clear-jobs")
+					.then(res => {
+						this.$snack.success({
+							text: "Queue Clear",
+							action: this.clickAction
+						});
+						this.$refs.clearJobs.stopLoading();
+					})
+					.catch(err => {
+						this.$refs.clearJobs.stopLoading();
+					});
+			},
 			validEmail() {
 				return true;
 				console.log("validEmail");

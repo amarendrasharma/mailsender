@@ -1,20 +1,22 @@
 <template>
 	<div>
-		{{emails}}
-		<table class="table-auto">
-			<thead>
-				<tr>
-					<th class="px-4 py-2">#</th>
-					<th class="px-4 py-2">Name</th>
-					<th class="px-4 py-2">Email</th>
+		<table class="table-fixed">
+			<thead class="bg-black flex text-white w-full">
+				<tr class="flex w-full">
+					<th class="px-4 py-2 w-1/6">#</th>
+					<th class="px-4 py-2 w-2/6">Name</th>
+					<th class="px-4 py-2 w-3/6">Email</th>
 				</tr>
 			</thead>
 
-			<tbody>
-				<tr class="bg-gray-100" v-for="(mail,index) in mails" :key="index">
-					<td class="border px-4 py-2">{{index}}</td>
-					<td class="border px-4 py-2">{{mail.name}}</td>
-					<td class="border px-4 py-2">{{mail.email}}</td>
+			<tbody
+				class="flex flex-col items-center justify-between overflow-y-scroll w-full"
+				style="height:500px"
+			>
+				<tr class="flex w-full" v-for="(mail,index) in mails" :key="index">
+					<td class="border px-4 py-2 w-1/6">{{index}}</td>
+					<td class="border px-4 py-2 w-2/6">{{mail.name}}</td>
+					<td class="border px-4 py-2 w-3/6">{{mail.email}}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -23,11 +25,19 @@
 <script>
 	export default {
 		props: ["mails"],
-		computed: {},
+		computed: {
+			mailsearch() {
+				const searchString = this.searchstring.toLowerCase();
+				return mails.filter(item => {
+					item.email.toLowerCase().includes(searchstring);
+				});
+			}
+		},
 
 		data() {
 			return {
 				// emails: []
+				searchstring: ""
 			};
 		}
 	};
